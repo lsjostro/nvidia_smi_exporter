@@ -6,4 +6,4 @@ RUN apt-get update && apt-get install -y golang-go && go build /nvidia_smi_expor
 
 EXPOSE 9101:9101
 
-ENTRYPOINT ["/nvidia_smi_exporter 9101"]
+ENTRYPOINT ["/nvidia_smi_exporter"]
