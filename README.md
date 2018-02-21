@@ -17,7 +17,6 @@ Default port is 9101
 ```
 > nvidia-docker run -d --net="host" nvidia_smi_exporter:0
 ```
-Default port is 9101
 
 ### localhost:9101/metrics
 ```
