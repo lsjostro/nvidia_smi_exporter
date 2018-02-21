@@ -18,7 +18,7 @@ Default port is 9101
 > nvidia-docker run -d --net="host" nvidia_smi_exporter:0
 ```
 
-### localhost:9101/metrics
+### curl http://localhost:9101/metrics/Moved
 ```
 temperature_gpu{gpu="TITAN X (Pascal)[0]"} 41
 utilization_gpu{gpu="TITAN X (Pascal)[0]"} 0
