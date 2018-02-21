@@ -2,21 +2,16 @@
 
 nvidia-smi metrics exporter for Prometheus
 
-## Build
+## Docker Build
 ```
-> go build -v nvidia_smi_exporter
+> docker-build .
 ```
-
-## Run
-```
-> ./nvidia_smi_exporter [<port>]
-```
-Default port is 9101
 
 ## Docker Run
 ```
 > nvidia-docker run -d --net="host" nvidia_smi_exporter:0
 ```
+Default port is 9101
 
 ### curl http://localhost:9101/metrics/Moved
 ```
