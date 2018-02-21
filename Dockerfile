@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-runtime-ubuntu16.04
+FROM nvidia/cuda:8.0-runtime-ubuntu14.04
 MAINTAINER Kevin Jen <kevin7674@gmail.com>
 
 COPY nvidia_smi_exporter.go /nvidia_smi_exporter.go
