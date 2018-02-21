@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-base-ubuntu16.04
+FROM ubuntu16.04
 MAINTAINER Kevin Jen <kevin7674@gmail.com>
 
 COPY nvidia_smi_exporter.go /nvidia_smi_exporter.go
