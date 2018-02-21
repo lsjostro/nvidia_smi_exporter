@@ -2,7 +2,7 @@
 
 nvidia-smi metrics exporter for Prometheus
 
-## Docker Build
+## Build Image
 ```
 > docker-build .
 ```
