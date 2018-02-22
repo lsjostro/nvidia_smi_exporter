@@ -13,7 +13,7 @@ nvidia-smi metrics exporter for Prometheus
 ```
 Default port is 9101
 
-### curl localhost:9101/metrics/Moved
+### curl localhost:9101/metrics
 ```
 temperature_gpu{gpu="Tesla V100-SXM2-16GB[0]"} 34
 utilization_gpu{gpu="Tesla V100-SXM2-16GB[0]"} 0
