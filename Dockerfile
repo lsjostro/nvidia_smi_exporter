@@ -1,9 +1,9 @@
-FROM nvidia/cuda
-MAINTAINER Kevin Jen <kevin7674@gmail.com>
+FROM golang:1.10 as build
+WORKDIR /go/src/nvidia_smi_exporter
+ADD . /go/src/nvidia_smi_exporter
+RUN go install .
 
-COPY nvidia_smi_exporter.go /nvidia_smi_exporter.go
-RUN apt-get update && apt-get install -y golang-go && go build /nvidia_smi_exporter.go && apt-get remove -y golang-go
-
+FROM gcr.io/distroless/base
+COPY --from=build /go/bin/nvidia_smi_exporter /
 EXPOSE 9101:9101
-
 ENTRYPOINT ["/nvidia_smi_exporter"]
