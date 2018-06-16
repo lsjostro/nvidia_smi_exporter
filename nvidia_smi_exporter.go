@@ -23,7 +23,7 @@ var (
 func metrics(response http.ResponseWriter, request *http.Request) {
 	out, err := exec.Command(
 		"nvidia-smi",
-		"--query-gpu=name,index,temperature.gpu,utilization.gpu,utilization.memory,memory.total,memory.free,memory.used,fan.speed,power.draw,clocks.current.graphics,clocks.current.sm,clocks.current.memory,clocks.current.video",
+		"--query-gpu=name,index,temperature.gpu,utilization.gpu,utilization.memory,memory.total,memory.free,memory.used,fan.speed,power.draw,clocks.current.graphics,clocks.current.sm,clocks.current.memory,clocks.current.video,encoder.stats.sessionCount,encoder.stats.averageFps,encoder.stats.averageLatency",
 		"--format=csv,noheader,nounits").Output()
 
 	if err != nil {
@@ -44,6 +44,7 @@ func metrics(response http.ResponseWriter, request *http.Request) {
 		"temperature.gpu", "utilization.gpu",
 		"utilization.memory", "memory.total", "memory.free", "memory.used", "fan.speed", "power.draw",
 		"clocks.current.graphics", "clocks.current.sm", "clocks.current.memory", "clocks.current.video",
+		"encoder.stats.session_count", "encoder.stats.average_fps", "encoder.stats.average_latency",
 	}
 
 	result := ""
