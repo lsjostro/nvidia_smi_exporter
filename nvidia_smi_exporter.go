@@ -48,7 +48,7 @@ func metrics(response http.ResponseWriter, request *http.Request) {
 	for _, row := range records {
 		name := fmt.Sprintf("%s[%s]", row[0], row[1])
 		for idx, value := range row[2:] {
-			fmt.Fprintf(response, "nvidia_%s%s{gpu=\"%s\"} %s\n", metricList[idx], name, value)
+			fmt.Fprintf(response, "nvidia_%s{gpu=\"%s\"} %s\n", metricList[idx], name, value)
 		}
 	}
 }
