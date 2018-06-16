@@ -7,9 +7,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	//    "os"
 	"os/exec"
-	"strings"
 )
 
 // name, index, temperature.gpu, utilization.gpu,
@@ -41,23 +39,18 @@ func metrics(response http.ResponseWriter, request *http.Request) {
 	}
 
 	metricList := []string{
-		"temperature.gpu", "utilization.gpu",
-		"utilization.memory", "memory.total", "memory.free", "memory.used", "fan.speed", "power.draw",
-		"clocks.current.graphics", "clocks.current.sm", "clocks.current.memory", "clocks.current.video",
-		"encoder.stats.session_count", "encoder.stats.average_fps", "encoder.stats.average_latency",
+		"temperature_gpu", "utilization_gpu",
+		"utilization_memory", "memory_total", "memory_free", "memory_used", "fan_speed", "power_draw",
+		"clocks_current_graphics", "clocks_current_sm", "clocks_current_memory", "clocks_current_video",
+		"encoder_stats_session_count", "encoder_stats_average_fps", "encoder_stats_average_latency",
 	}
 
-	result := ""
 	for _, row := range records {
 		name := fmt.Sprintf("%s[%s]", row[0], row[1])
 		for idx, value := range row[2:] {
-			result = fmt.Sprintf(
-				"%s%s%s{gpu=\"%s\"} %s\n", result, "nvidia.",
-				metricList[idx], name, value)
+			fmt.Fprintf(response, "nvidia_%s%s{gpu=\"%s\"} %s\n", metricList[idx], name, value)
 		}
 	}
-
-	fmt.Fprintf(response, strings.Replace(result, ".", "_", -1))
 }
 
 func init() {
