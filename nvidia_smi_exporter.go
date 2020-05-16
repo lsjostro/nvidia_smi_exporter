@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os/exec"
+	"strconv"
 )
 
 // name, index, temperature.gpu, utilization.gpu,
@@ -46,10 +47,18 @@ func metrics(response http.ResponseWriter, request *http.Request) {
 	}
 
 	for _, row := range records {
+		var unsupported int
 		name := fmt.Sprintf("%s[%s]", row[0], row[1])
 		for idx, value := range row[2:] {
-			fmt.Fprintf(response, "nvidia_%s{gpu=\"%s\"} %s\n", metricList[idx], name, value)
+			v, err := strconv.ParseFloat(value, 64)
+			if err != nil {
+				fmt.Printf("error parsing value %q for metric %q: %+v\n", value, metricList[idx], err)
+				unsupported++
+				continue
+			}
+			fmt.Fprintf(response, "nvidia_%s{gpu=\"%s\"} %f\n", metricList[idx], name, v)
 		}
+		fmt.Fprintf(response, "nvidia_unsupported_metrics_count{gpu=\"%s\"} %f\n", name, unsupported)
 	}
 }
 
